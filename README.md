@@ -1,1 +1,3 @@
-# starting_with_ngscuda
+# Starting with ngscuda C++ programming
+
+
