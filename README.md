@@ -19,3 +19,19 @@ cout << "dx = " << double(dx[1]) << endl;
   
 Free(dx);
 ```
+
+
+## Vectors and matrices
+
+`demo_vecs.cpp`
+
+```cpp
+Vector<double> x(n), y(n);
+x = 1; y = 2;
+
+// init from host vectors:
+Vector<Dev<double>> devx(x), devy(y);
+
+// expression templates on device
+devx += 3*devy;
+```

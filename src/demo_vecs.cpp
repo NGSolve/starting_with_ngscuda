@@ -11,7 +11,7 @@ int main()
   Vector<double> x(10), y(10);
   for (int i = 0; i < x.Size(); i++) x(i) = 10+i;
   
-  ngbla::Vector<Dev<double>> vx(x), vy(10);
+  Vector<Dev<double>> vx(x), vy(10);
     
   cout << "x = " << x << endl;
   
