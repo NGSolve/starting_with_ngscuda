@@ -36,7 +36,11 @@ Vector<Dev<double>> devx(x), devy(y);
 
 // expression templates on device
 devx += 3*devy;
+
+devx.D2H(x);
 ```
+
+
 
 by now we have assignment, for VectorView
 
@@ -46,3 +50,13 @@ Matrix multiplication calls cublas:
 Matrix<Dev<double>> a, b, c;
 c = a*b;
 ```
+
+
+
+## Timings
+
+`x += alpha * y`
+
+
+`A = B*C` (using cublas)
+
