@@ -323,7 +323,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -339,6 +341,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parallel-loop-on-the-device">A parallel loop on the device</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -365,7 +375,23 @@ document.write(`
 <span class="n">Free</span><span class="p">(</span><span class="n">dx</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>new/delete would be nicer?</p>
+<p>To avoid  accidentally creating an <code class="docutils literal notranslate"><span class="pre">Dev&lt;T&gt;</span></code> object on the host, it has deleted default constructor.
+This disallows also creation via new/delete.</p>
+<section id="a-parallel-loop-on-the-device">
+<h2>A parallel loop on the device<a class="headerlink" href="#a-parallel-loop-on-the-device" title="Link to this heading">#</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dev_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dev</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">Malloc</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="n">DeviceParallelFor</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">dev_array</span><span class="p">]</span><span class="w"> </span><span class="n">DEVICE_LAMBDA</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">tid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">dev_array</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">tid</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;array[5] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dev_array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="n">Free</span><span class="w"> </span><span class="p">(</span><span class="n">dev_array</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -422,6 +448,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parallel-loop-on-the-device">A parallel loop on the device</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
