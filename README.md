@@ -9,8 +9,6 @@
 
 
 
-
-
 ## Creating variables on the device
 
 from `demo_devT.cpp`
