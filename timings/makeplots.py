@@ -19,7 +19,12 @@ plt.title('Runtime performance vector copy')
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig('timing_copyvec.png')
+# plt.show()
+
+
+
+
 
 
 
