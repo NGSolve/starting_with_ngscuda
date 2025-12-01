@@ -15,3 +15,8 @@ All timings have been measured on an NVIDIA GeForce RTX 5090.
 
 `A = B*C` (using cublas)
 
+```{image} pictures/timing_matmat.png
+:width: 40%
+:align: center
+```
+
