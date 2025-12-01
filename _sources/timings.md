@@ -13,7 +13,9 @@ All timings have been measured on an NVIDIA GeForce RTX 5090.
 ```
 
 
-`A = B*C` (using cublas)
+`C = A*B` (using cublas)
+
+with $A$ is $m \times m$, and $B$ is $m \times n$.
 
 ```{image} pictures/timing_matmat.png
 :width: 40%
