@@ -11,10 +11,10 @@ int main()
 {
 
   ofstream matmat("timing_matmat.txt");
-  for (int n = 1024; n <= 1024*1024; n*=2)
+  for (int n = 64; n <= 256*1024; n*=2)
     {
       matmat << n;
-      for (int m : { 20, 50, 100, 200 })
+      for (int m : { 20, 50, 100, 200, 500 })
         {
           Matrix<double> a(m,m), b(m,n), c(m,n);
           c = 0; a = 1; b = 1;
@@ -36,8 +36,9 @@ int main()
           t.AddFlops (double(runs)*n*m*m);
         
           cout << "n = " << n << ", m = " << m << ", GFlops = " << t.GetMFlops()*1e-3 << endl;
-          matmat << " " << t.GetMFlops()*1e-3  << endl;
+          matmat << " " << t.GetMFlops()*1e-3;
         }
+      matmat << endl;
     }
 }
 

@@ -25,11 +25,37 @@ int main()
       cudaDeviceSynchronize();
       t.Start();
       for (size_t k = 0; k < runs; k++)
-        devy.Range(0,n) = 2.7*devx;
+        //devy.Range(0,n) = 2.7*devx;
+        devy = 2.7*devx;
       cudaDeviceSynchronize();
       t.Stop();
       t.AddFlops (double(runs)*n);
       cout << "n = " << n << ", GFlops = " << t.GetMFlops()*1e-3 << endl;
       copyvec << n << " " << t.GetMFlops()*1e-3  << endl;
+    }
+
+
+  ofstream daxpy("timing_daxpy.txt");
+  for (int n = 1024; n <= 256*1024*1024; n*=2)
+    {
+      Vector<double> x(n), y(n);
+      x = 1; y = 2;
+
+      Vector<Dev<double>> devx(x), devy(y);
+
+      double est_time = 5e-6 + n*1e-10;
+      size_t runs = 0.1 / est_time;
+
+      Timer t("vec"+ToString(n));
+
+      cudaDeviceSynchronize();
+      t.Start();
+      for (size_t k = 0; k < runs; k++)
+        devy += 1.0001*devx;
+      cudaDeviceSynchronize();
+      t.Stop();
+      t.AddFlops (double(runs)*n);
+      cout << "n = " << n << ", GFlops = " << t.GetMFlops()*1e-3 << endl;
+      daxpy << n << " " << t.GetMFlops()*1e-3  << endl;
     }
 }
