@@ -45,7 +45,7 @@ make -j 8 install
 ```
 
 
-### the slurm script:
+### the slurm script `submit_slurm.sh`:
 ```
 #!/bin/bash
 #SBATCH --job-name "myjob"

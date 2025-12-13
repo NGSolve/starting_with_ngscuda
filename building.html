@@ -347,7 +347,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script">the slurm script:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
 </ul>
 </li>
 </ul>
@@ -399,8 +399,8 @@ document.write(`
 <span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="mi">8</span> <span class="n">install</span>
 </pre></div>
 </div>
-<section id="the-slurm-script">
-<h3>the slurm script:<a class="headerlink" href="#the-slurm-script" title="Link to this heading">#</a></h3>
+<section id="the-slurm-script-submit-slurm-sh">
+<h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#the-slurm-script-submit-slurm-sh" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #SBATCH --job-name &quot;myjob&quot;
 #SBATCH --gres=gpu:1
@@ -511,7 +511,7 @@ echo &quot;Job finished at $(date)&quot;
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script">the slurm script:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
 </ul>
 </li>
 </ul>
