@@ -15,6 +15,8 @@ cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREF
 
 ## build on the musica cluster:
 
+* now working exactly with gcc 13 and Python 3.14
+
 ```
 module purge --force
 module load EESSI/2025.06 ASC/2025.06
