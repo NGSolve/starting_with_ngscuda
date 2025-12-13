@@ -66,10 +66,8 @@ module load GCC/13 OpenBLAS/0.3.27-GCC-13.3.0  CUDA
 
 source /home/js65943/ngs/bin/activate
 
-export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2025.06/software/linux
-/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2025.06/software/linu
-x/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2025.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
 
 
 which python

@@ -405,40 +405,38 @@ document.write(`
 </div>
 <section id="the-slurm-script-submit-slurm-sh">
 <h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#the-slurm-script-submit-slurm-sh" title="Link to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#SBATCH --job-name &quot;myjob&quot;
-#SBATCH --gres=gpu:1
-#SBATCH -p zen4_0768_h100x4
-#SBATCH --qos zen4_0768_h100x4
-#SBATCH --threads-per-core=1
-#SBATCH --time=01:00:00
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name &quot;myjob&quot;</span>
+<span class="c1">#SBATCH --gres=gpu:1</span>
+<span class="c1">#SBATCH -p zen4_0768_h100x4</span>
+<span class="c1">#SBATCH --qos zen4_0768_h100x4</span>
+<span class="c1">#SBATCH --threads-per-core=1</span>
+<span class="c1">#SBATCH --time=01:00:00</span>
 
-# Optional: load modules (adjust to your environment)
+<span class="c1"># Optional: load modules (adjust to your environment)</span>
 
-module purge --force
-module load EESSI/2025.06 ASC/2025.06
-module load GCC/13 OpenBLAS/0.3.27-GCC-13.3.0  CUDA
+<span class="n">module</span> <span class="n">purge</span> <span class="o">--</span><span class="n">force</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">EESSI</span><span class="o">/</span><span class="mf">2025.06</span> <span class="n">ASC</span><span class="o">/</span><span class="mf">2025.06</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">GCC</span><span class="o">/</span><span class="mi">13</span> <span class="n">OpenBLAS</span><span class="o">/</span><span class="mf">0.3.27</span><span class="o">-</span><span class="n">GCC</span><span class="o">-</span><span class="mf">13.3.0</span>  <span class="n">CUDA</span>
 
-source /home/js65943/ngs/bin/activate
+<span class="n">source</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">js65943</span><span class="o">/</span><span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 
-export LD_LIBRARY_PATH=&quot;/cvmfs/software.eessi.io/versions/2025.06/software/linux
-/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH&quot;
-export LD_LIBRARY_PATH=&quot;/cvmfs/software.asc.ac.at/versions/2025.06/software/linu
-x/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH&quot;
+<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH&quot;</span>
+<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.asc.ac.at/versions/2025.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH&quot;</span>
 
 
-which python
-nvidia-smi
+<span class="n">which</span> <span class="n">python</span>
+<span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
 
-# Run from the directory you submitted from
-# cd &quot;${SLURM_SUBMIT_DIR:-$PWD}&quot;
-cd ~/submit
+<span class="c1"># Run from the directory you submitted from</span>
+<span class="c1"># cd &quot;${SLURM_SUBMIT_DIR:-$PWD}&quot;</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">submit</span>
 
-# Example commands: replace with your job&#39;s commands
-echo &quot;Job started at $(date)&quot;
-echo &quot;Running on host $(hostname)&quot;
-python test.py 
-echo &quot;Job finished at $(date)&quot;
+<span class="c1"># Example commands: replace with your job&#39;s commands</span>
+<span class="n">echo</span> <span class="s2">&quot;Job started at $(date)&quot;</span>
+<span class="n">echo</span> <span class="s2">&quot;Running on host $(hostname)&quot;</span>
+<span class="n">python</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> 
+<span class="n">echo</span> <span class="s2">&quot;Job finished at $(date)&quot;</span>
 </pre></div>
 </div>
 <p>and a python file <code class="docutils literal notranslate"><span class="pre">test.py</span></code> in the submit directory:</p>
