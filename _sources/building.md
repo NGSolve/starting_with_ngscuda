@@ -69,6 +69,8 @@ source /home/js65943/ngs/bin/activate
 export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2025.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
 
+export PYTHONPATH="/home/js65943/install/lib/python3.14/site-packages:$PYTHONPATH"
+
 
 which python
 nvidia-smi
@@ -86,9 +88,6 @@ echo "Job finished at $(date)"
 
 and a python file `test.py` in the submit directory:
 ```
-import sys
-sys.path.append('/home/js65943/install/lib/python3.14/site-packages')
-
 import ngsolve
 print ("have ngsolve")
 

@@ -424,6 +424,8 @@ document.write(`
 <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH&quot;</span>
 <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.asc.ac.at/versions/2025.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH&quot;</span>
 
+<span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/home/js65943/install/lib/python3.14/site-packages:$PYTHONPATH&quot;</span>
+
 
 <span class="n">which</span> <span class="n">python</span>
 <span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
@@ -440,10 +442,7 @@ document.write(`
 </pre></div>
 </div>
 <p>and a python file <code class="docutils literal notranslate"><span class="pre">test.py</span></code> in the submit directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/home/js65943/install/lib/python3.14/site-packages&#39;</span><span class="p">)</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">ngsolve</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ngsolve</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;have ngsolve&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">ngsolve.ngscuda</span>
