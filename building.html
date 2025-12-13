@@ -346,13 +346,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-on-the-musica-cluster-with-eessi-2023-06">Building on the musica cluster with EESSI/2023.06</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-with-eessi-2023-06">Building with EESSI/2023.06</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster-eessi-2025-06">build on the musica cluster EESSI/2025.06</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
 </ul>
@@ -374,8 +374,77 @@ document.write(`
 <span class="n">cmake</span> <span class="o">../../</span><span class="n">src</span><span class="o">/</span><span class="n">ngsolve</span> <span class="o">-</span><span class="n">DUSE_SUPERBUILD</span><span class="o">=</span><span class="n">ON</span> <span class="o">-</span><span class="n">DUSE_CCACHE</span><span class="o">=</span><span class="n">ON</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=~/</span><span class="n">install</span> <span class="o">-</span><span class="n">DUSE_CUDA</span><span class="o">=</span><span class="n">ON</span>
 </pre></div>
 </div>
-<section id="build-on-the-musica-cluster">
-<h2>build on the musica cluster:<a class="headerlink" href="#build-on-the-musica-cluster" title="Link to this heading">#</a></h2>
+<section id="building-on-the-musica-cluster-with-eessi-2023-06">
+<h2>Building on the musica cluster with EESSI/2023.06<a class="headerlink" href="#building-on-the-musica-cluster-with-eessi-2023-06" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">purge</span> <span class="o">--</span><span class="n">force</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">GCC</span><span class="o">/</span><span class="mi">12</span> <span class="n">OpenBLAS</span><span class="o">/</span><span class="mf">0.3.23</span><span class="o">-</span><span class="n">GCC</span><span class="o">-</span><span class="mf">12.3.0</span> <span class="n">ccache</span> <span class="n">CUDA</span>
+
+<span class="n">python3</span><span class="mf">.12</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">ngs</span>
+<span class="n">source</span> <span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">netgen</span><span class="o">-</span><span class="n">occt</span><span class="o">-</span><span class="n">devel</span> <span class="n">cmake</span> <span class="n">numpy</span> <span class="n">pybind11</span> <span class="n">pybind11_stubgen</span> <span class="n">pip</span>
+
+
+<span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recurse</span><span class="o">-</span><span class="n">submodules</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">NGSolve</span><span class="o">/</span><span class="n">ngsolve</span><span class="o">.</span><span class="n">git</span> <span class="n">src</span><span class="o">/</span><span class="n">ngsolve</span>
+
+<span class="c1"># rm -rf build/ngsolve</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">build</span><span class="o">/</span><span class="n">ngsolve</span>
+<span class="n">cd</span> <span class="n">build</span><span class="o">/</span><span class="n">ngsolve</span>
+
+<span class="n">cmake</span> <span class="o">~/</span><span class="n">src</span><span class="o">/</span><span class="n">ngsolve</span> \
+  <span class="o">-</span><span class="n">DUSE_SUPERBUILD</span><span class="o">=</span><span class="n">ON</span> \
+  <span class="o">-</span><span class="n">DUSE_CCACHE</span><span class="o">=</span><span class="n">ON</span> \
+  <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=~/</span><span class="n">install</span> \
+  <span class="o">-</span><span class="n">DUSE_CUDA</span><span class="o">=</span><span class="n">ON</span> \
+  <span class="o">-</span><span class="n">DUSE_GUI</span><span class="o">=</span><span class="n">OFF</span> \
+  <span class="o">-</span><span class="n">DCMAKE_CUDA_ARCHITECTURES</span><span class="o">=</span><span class="s2">&quot;90&quot;</span> \
+  <span class="o">-</span><span class="n">DUSE_UMFPACK</span><span class="o">=</span><span class="n">OFF</span> \
+  <span class="o">-</span><span class="n">DBUILD_STUB_FILES</span><span class="o">=</span><span class="n">OFF</span>
+
+<span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="mi">8</span> <span class="n">install</span>
+</pre></div>
+</div>
+<section id="the-slurm-script-submit-slurm-sh">
+<h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#the-slurm-script-submit-slurm-sh" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name &quot;myjob&quot;</span>
+<span class="c1">#SBATCH --gres=gpu:1</span>
+<span class="c1">#SBATCH -p zen4_0768_h100x4</span>
+<span class="c1">#SBATCH --qos zen4_0768_h100x4</span>
+<span class="c1">#SBATCH --threads-per-core=1</span>
+<span class="c1">#SBATCH --time=01:00:00</span>
+
+<span class="c1"># Optional: load modules (adjust to your environment)</span>
+
+<span class="n">module</span> <span class="n">purge</span> <span class="o">--</span><span class="n">force</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">GCC</span><span class="o">/</span><span class="mi">12</span> <span class="n">OpenBLAS</span><span class="o">/</span><span class="mf">0.3.23</span><span class="o">-</span><span class="n">GCC</span><span class="o">-</span><span class="mf">12.3.0</span>  <span class="n">CUDA</span>
+
+<span class="n">source</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">js65943</span><span class="o">/</span><span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+
+<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/GCCcore/12.3.0/lib64:$LD_LIBRARY_PATH&quot;</span>
+<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.23-GCC-12.3.0/lib:$LD_LIBRARY_PATH&quot;</span>
+<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.asc.ac.at/versions/2023.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH&quot;</span>
+
+<span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/home/js65943/install/lib/python3.12/site-packages:$PYTHONPATH&quot;</span>
+
+<span class="n">which</span> <span class="n">python</span>
+<span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+
+<span class="c1"># Run from the directory you submitted from</span>
+<span class="c1"># cd &quot;${SLURM_SUBMIT_DIR:-$PWD}&quot;</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">submit</span>
+
+<span class="c1"># Example commands: replace with your job&#39;s commands</span>
+<span class="n">echo</span> <span class="s2">&quot;Job started at $(date)&quot;</span>
+<span class="n">echo</span> <span class="s2">&quot;Running on host $(hostname)&quot;</span>
+<span class="n">python</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> 
+<span class="n">echo</span> <span class="s2">&quot;Job finished at $(date)&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-on-the-musica-cluster-eessi-2025-06">
+<h2>build on the musica cluster EESSI/2025.06<a class="headerlink" href="#build-on-the-musica-cluster-eessi-2025-06" title="Link to this heading">#</a></h2>
+<p>cannot connect to the cuda driver</p>
 <ul class="simple">
 <li><p>now working exactly with gcc 13 and Python 3.14</p></li>
 <li><p>importing ngsolve.ngscuda still not working</p></li>
@@ -408,8 +477,8 @@ document.write(`
 <span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="mi">8</span> <span class="n">install</span>
 </pre></div>
 </div>
-<section id="the-slurm-script-submit-slurm-sh">
-<h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#the-slurm-script-submit-slurm-sh" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH --job-name &quot;myjob&quot;</span>
 <span class="c1">#SBATCH --gres=gpu:1</span>
@@ -494,74 +563,6 @@ document.write(`
 </div>
 </section>
 </section>
-<section id="building-with-eessi-2023-06">
-<h2>Building with EESSI/2023.06<a class="headerlink" href="#building-with-eessi-2023-06" title="Link to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">purge</span> <span class="o">--</span><span class="n">force</span>
-<span class="n">module</span> <span class="n">load</span> <span class="n">GCC</span><span class="o">/</span><span class="mi">12</span> <span class="n">OpenBLAS</span><span class="o">/</span><span class="mf">0.3.23</span><span class="o">-</span><span class="n">GCC</span><span class="o">-</span><span class="mf">12.3.0</span> <span class="n">ccache</span> <span class="n">CUDA</span>
-
-<span class="n">python3</span><span class="mf">.12</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">ngs</span>
-<span class="n">source</span> <span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">netgen</span><span class="o">-</span><span class="n">occt</span><span class="o">-</span><span class="n">devel</span> <span class="n">cmake</span> <span class="n">numpy</span> <span class="n">pybind11</span> <span class="n">pybind11_stubgen</span> <span class="n">pip</span>
-
-
-<span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recurse</span><span class="o">-</span><span class="n">submodules</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">NGSolve</span><span class="o">/</span><span class="n">ngsolve</span><span class="o">.</span><span class="n">git</span> <span class="n">src</span><span class="o">/</span><span class="n">ngsolve</span>
-
-<span class="c1"># rm -rf build/ngsolve</span>
-<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">build</span><span class="o">/</span><span class="n">ngsolve</span>
-<span class="n">cd</span> <span class="n">build</span><span class="o">/</span><span class="n">ngsolve</span>
-
-<span class="n">cmake</span> <span class="o">~/</span><span class="n">src</span><span class="o">/</span><span class="n">ngsolve</span> \
-  <span class="o">-</span><span class="n">DUSE_SUPERBUILD</span><span class="o">=</span><span class="n">ON</span> \
-  <span class="o">-</span><span class="n">DUSE_CCACHE</span><span class="o">=</span><span class="n">ON</span> \
-  <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=~/</span><span class="n">install</span> \
-  <span class="o">-</span><span class="n">DUSE_CUDA</span><span class="o">=</span><span class="n">ON</span> \
-  <span class="o">-</span><span class="n">DUSE_GUI</span><span class="o">=</span><span class="n">OFF</span> \
-  <span class="o">-</span><span class="n">DCMAKE_CUDA_ARCHITECTURES</span><span class="o">=</span><span class="s2">&quot;90&quot;</span> \
-  <span class="o">-</span><span class="n">DUSE_UMFPACK</span><span class="o">=</span><span class="n">OFF</span> \
-  <span class="o">-</span><span class="n">DBUILD_STUB_FILES</span><span class="o">=</span><span class="n">OFF</span>
-
-<span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="mi">8</span> <span class="n">install</span>
-</pre></div>
-</div>
-<section id="id1">
-<h3>the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name &quot;myjob&quot;</span>
-<span class="c1">#SBATCH --gres=gpu:1</span>
-<span class="c1">#SBATCH -p zen4_0768_h100x4</span>
-<span class="c1">#SBATCH --qos zen4_0768_h100x4</span>
-<span class="c1">#SBATCH --threads-per-core=1</span>
-<span class="c1">#SBATCH --time=01:00:00</span>
-
-<span class="c1"># Optional: load modules (adjust to your environment)</span>
-
-<span class="n">module</span> <span class="n">purge</span> <span class="o">--</span><span class="n">force</span>
-<span class="n">module</span> <span class="n">load</span> <span class="n">GCC</span><span class="o">/</span><span class="mi">12</span> <span class="n">OpenBLAS</span><span class="o">/</span><span class="mf">0.3.23</span><span class="o">-</span><span class="n">GCC</span><span class="o">-</span><span class="mf">12.3.0</span>  <span class="n">CUDA</span>
-
-<span class="n">source</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">js65943</span><span class="o">/</span><span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
-
-<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/GCCcore/12.3.0/lib64:$LD_LIBRARY_PATH&quot;</span>
-<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.23-GCC-12.3.0/lib:$LD_LIBRARY_PATH&quot;</span>
-<span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;/cvmfs/software.asc.ac.at/versions/2023.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH&quot;</span>
-
-<span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/home/js65943/install/lib/python3.12/site-packages:$PYTHONPATH&quot;</span>
-
-<span class="n">which</span> <span class="n">python</span>
-<span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
-
-<span class="c1"># Run from the directory you submitted from</span>
-<span class="c1"># cd &quot;${SLURM_SUBMIT_DIR:-$PWD}&quot;</span>
-<span class="n">cd</span> <span class="o">~/</span><span class="n">submit</span>
-
-<span class="c1"># Example commands: replace with your job&#39;s commands</span>
-<span class="n">echo</span> <span class="s2">&quot;Job started at $(date)&quot;</span>
-<span class="n">echo</span> <span class="s2">&quot;Running on host $(hostname)&quot;</span>
-<span class="n">python</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> 
-<span class="n">echo</span> <span class="s2">&quot;Job finished at $(date)&quot;</span>
-</pre></div>
-</div>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -619,13 +620,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-on-the-musica-cluster-with-eessi-2023-06">Building on the musica cluster with EESSI/2023.06</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-with-eessi-2023-06">Building with EESSI/2023.06</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster-eessi-2025-06">build on the musica cluster EESSI/2025.06</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
 </ul>

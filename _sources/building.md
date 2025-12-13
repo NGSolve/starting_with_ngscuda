@@ -13,7 +13,87 @@ cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREF
 
 
 
-## build on the musica cluster:
+
+
+
+## Building on the musica cluster with EESSI/2023.06
+
+```
+module purge --force
+module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
+
+python3.12 -m venv ngs
+source ngs/bin/activate
+pip install --upgrade netgen-occt-devel cmake numpy pybind11 pybind11_stubgen pip
+
+
+git clone --recurse-submodules https://github.com/NGSolve/ngsolve.git src/ngsolve
+
+# rm -rf build/ngsolve
+mkdir -p build/ngsolve
+cd build/ngsolve
+
+cmake ~/src/ngsolve \
+  -DUSE_SUPERBUILD=ON \
+  -DUSE_CCACHE=ON \
+  -DCMAKE_INSTALL_PREFIX=~/install \
+  -DUSE_CUDA=ON \
+  -DUSE_GUI=OFF \
+  -DCMAKE_CUDA_ARCHITECTURES="90" \
+  -DUSE_UMFPACK=OFF \
+  -DBUILD_STUB_FILES=OFF
+
+make -j 8 install
+```
+
+
+
+### the slurm script `submit_slurm.sh`:
+```
+#!/bin/bash
+#SBATCH --job-name "myjob"
+#SBATCH --gres=gpu:1
+#SBATCH -p zen4_0768_h100x4
+#SBATCH --qos zen4_0768_h100x4
+#SBATCH --threads-per-core=1
+#SBATCH --time=01:00:00
+
+# Optional: load modules (adjust to your environment)
+
+module purge --force
+module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0  CUDA
+
+source /home/js65943/ngs/bin/activate
+
+export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/GCCcore/12.3.0/lib64:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.23-GCC-12.3.0/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2023.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
+
+export PYTHONPATH="/home/js65943/install/lib/python3.12/site-packages:$PYTHONPATH"
+
+which python
+nvidia-smi
+
+# Run from the directory you submitted from
+# cd "${SLURM_SUBMIT_DIR:-$PWD}"
+cd ~/submit
+
+# Example commands: replace with your job's commands
+echo "Job started at $(date)"
+echo "Running on host $(hostname)"
+python test.py 
+echo "Job finished at $(date)"
+```
+
+
+
+
+
+
+## build on the musica cluster EESSI/2025.06
+
+cannot connect to the cuda driver
+
 
 * now working exactly with gcc 13 and Python 3.14
 * importing ngsolve.ngscuda still not working
@@ -135,78 +215,5 @@ Initializing cublas and cusparse.
  ** On entry to cusparseCreate(): CUDA context cannot be initialized
 
 have ngsolve
-```
-
-
-
-## Building with EESSI/2023.06
-
-```
-module purge --force
-module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
-
-python3.12 -m venv ngs
-source ngs/bin/activate
-pip install --upgrade netgen-occt-devel cmake numpy pybind11 pybind11_stubgen pip
-
-
-git clone --recurse-submodules https://github.com/NGSolve/ngsolve.git src/ngsolve
-
-# rm -rf build/ngsolve
-mkdir -p build/ngsolve
-cd build/ngsolve
-
-cmake ~/src/ngsolve \
-  -DUSE_SUPERBUILD=ON \
-  -DUSE_CCACHE=ON \
-  -DCMAKE_INSTALL_PREFIX=~/install \
-  -DUSE_CUDA=ON \
-  -DUSE_GUI=OFF \
-  -DCMAKE_CUDA_ARCHITECTURES="90" \
-  -DUSE_UMFPACK=OFF \
-  -DBUILD_STUB_FILES=OFF
-
-make -j 8 install
-```
-
-
-
-
-
-### the slurm script `submit_slurm.sh`:
-```
-#!/bin/bash
-#SBATCH --job-name "myjob"
-#SBATCH --gres=gpu:1
-#SBATCH -p zen4_0768_h100x4
-#SBATCH --qos zen4_0768_h100x4
-#SBATCH --threads-per-core=1
-#SBATCH --time=01:00:00
-
-# Optional: load modules (adjust to your environment)
-
-module purge --force
-module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0  CUDA
-
-source /home/js65943/ngs/bin/activate
-
-export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/GCCcore/12.3.0/lib64:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.23-GCC-12.3.0/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2023.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
-
-export PYTHONPATH="/home/js65943/install/lib/python3.12/site-packages:$PYTHONPATH"
-
-which python
-nvidia-smi
-
-# Run from the directory you submitted from
-# cd "${SLURM_SUBMIT_DIR:-$PWD}"
-cd ~/submit
-
-# Example commands: replace with your job's commands
-echo "Job started at $(date)"
-echo "Running on host $(hostname)"
-python test.py 
-echo "Job finished at $(date)"
 ```
 
