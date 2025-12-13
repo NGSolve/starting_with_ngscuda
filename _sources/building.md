@@ -99,3 +99,40 @@ which you submit as
 ```
 sbatch --partition=zen4_0768_h100x4 submit_slurm.sh
 ```
+
+
+
+### remaining problem
+
+the output gives
+```
+/home/js65943/ngs/bin/python
+Sat Dec 13 15:07:26 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100                    On  |   00000000:C6:00.0 Off |                    0 |
+| N/A   41C    P0             68W /  700W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Job started at Sat Dec 13 15:07:26 CET 2025
+Running on host n3015-020
+cudaGetDeviceCount() failed: CUDA driver version is insufficient for CUDA runtime version
+CUDA Device Query...
+Initializing cublas and cusparse.
+ ** On entry to cusparseCreate(): CUDA context cannot be initialized
+
+have ngsolve
+```

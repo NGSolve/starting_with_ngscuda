@@ -348,6 +348,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
 </ul>
@@ -453,6 +454,41 @@ document.write(`
 </pre></div>
 </div>
 </section>
+<section id="remaining-problem">
+<h3>remaining problem<a class="headerlink" href="#remaining-problem" title="Link to this heading">#</a></h3>
+<p>the output gives</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">js65943</span><span class="o">/</span><span class="n">ngs</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span>
+<span class="n">Sat</span> <span class="n">Dec</span> <span class="mi">13</span> <span class="mi">15</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">26</span> <span class="mi">2025</span>       
+<span class="o">+-----------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NVIDIA</span><span class="o">-</span><span class="n">SMI</span> <span class="mf">580.95.05</span>              <span class="n">Driver</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">580.95.05</span>      <span class="n">CUDA</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">13.0</span>     <span class="o">|</span>
+<span class="o">+-----------------------------------------+------------------------+----------------------+</span>
+<span class="o">|</span> <span class="n">GPU</span>  <span class="n">Name</span>                 <span class="n">Persistence</span><span class="o">-</span><span class="n">M</span> <span class="o">|</span> <span class="n">Bus</span><span class="o">-</span><span class="n">Id</span>          <span class="n">Disp</span><span class="o">.</span><span class="n">A</span> <span class="o">|</span> <span class="n">Volatile</span> <span class="n">Uncorr</span><span class="o">.</span> <span class="n">ECC</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Fan</span>  <span class="n">Temp</span>   <span class="n">Perf</span>          <span class="n">Pwr</span><span class="p">:</span><span class="n">Usage</span><span class="o">/</span><span class="n">Cap</span> <span class="o">|</span>           <span class="n">Memory</span><span class="o">-</span><span class="n">Usage</span> <span class="o">|</span> <span class="n">GPU</span><span class="o">-</span><span class="n">Util</span>  <span class="n">Compute</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
+<span class="o">|</span>                                         <span class="o">|</span>                        <span class="o">|</span>               <span class="n">MIG</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
+<span class="o">|=========================================+========================+======================|</span>
+<span class="o">|</span>   <span class="mi">0</span>  <span class="n">NVIDIA</span> <span class="n">H100</span>                    <span class="n">On</span>  <span class="o">|</span>   <span class="mi">00000000</span><span class="p">:</span><span class="n">C6</span><span class="p">:</span><span class="mf">00.0</span> <span class="n">Off</span> <span class="o">|</span>                    <span class="mi">0</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">N</span><span class="o">/</span><span class="n">A</span>   <span class="mi">41</span><span class="n">C</span>    <span class="n">P0</span>             <span class="mi">68</span><span class="n">W</span> <span class="o">/</span>  <span class="mi">700</span><span class="n">W</span> <span class="o">|</span>       <span class="mi">0</span><span class="n">MiB</span> <span class="o">/</span>  <span class="mi">95830</span><span class="n">MiB</span> <span class="o">|</span>      <span class="mi">0</span><span class="o">%</span>      <span class="n">Default</span> <span class="o">|</span>
+<span class="o">|</span>                                         <span class="o">|</span>                        <span class="o">|</span>             <span class="n">Disabled</span> <span class="o">|</span>
+<span class="o">+-----------------------------------------+------------------------+----------------------+</span>
+
+<span class="o">+-----------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Processes</span><span class="p">:</span>                                                                              <span class="o">|</span>
+<span class="o">|</span>  <span class="n">GPU</span>   <span class="n">GI</span>   <span class="n">CI</span>              <span class="n">PID</span>   <span class="n">Type</span>   <span class="n">Process</span> <span class="n">name</span>                        <span class="n">GPU</span> <span class="n">Memory</span> <span class="o">|</span>
+<span class="o">|</span>        <span class="n">ID</span>   <span class="n">ID</span>                                                               <span class="n">Usage</span>      <span class="o">|</span>
+<span class="o">|=========================================================================================|</span>
+<span class="o">|</span>  <span class="n">No</span> <span class="n">running</span> <span class="n">processes</span> <span class="n">found</span>                                                             <span class="o">|</span>
+<span class="o">+-----------------------------------------------------------------------------------------+</span>
+<span class="n">Job</span> <span class="n">started</span> <span class="n">at</span> <span class="n">Sat</span> <span class="n">Dec</span> <span class="mi">13</span> <span class="mi">15</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">26</span> <span class="n">CET</span> <span class="mi">2025</span>
+<span class="n">Running</span> <span class="n">on</span> <span class="n">host</span> <span class="n">n3015</span><span class="o">-</span><span class="mi">020</span>
+<span class="n">cudaGetDeviceCount</span><span class="p">()</span> <span class="n">failed</span><span class="p">:</span> <span class="n">CUDA</span> <span class="n">driver</span> <span class="n">version</span> <span class="ow">is</span> <span class="n">insufficient</span> <span class="k">for</span> <span class="n">CUDA</span> <span class="n">runtime</span> <span class="n">version</span>
+<span class="n">CUDA</span> <span class="n">Device</span> <span class="n">Query</span><span class="o">...</span>
+<span class="n">Initializing</span> <span class="n">cublas</span> <span class="ow">and</span> <span class="n">cusparse</span><span class="o">.</span>
+ <span class="o">**</span> <span class="n">On</span> <span class="n">entry</span> <span class="n">to</span> <span class="n">cusparseCreate</span><span class="p">():</span> <span class="n">CUDA</span> <span class="n">context</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">initialized</span>
+
+<span class="n">have</span> <span class="n">ngsolve</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -513,6 +549,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-on-the-musica-cluster">build on the musica cluster:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-script-submit-slurm-sh">the slurm script <code class="docutils literal notranslate"><span class="pre">submit_slurm.sh</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-problem">remaining problem</a></li>
 </ul>
 </li>
 </ul>
