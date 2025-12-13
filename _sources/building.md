@@ -85,6 +85,10 @@ python test.py
 echo "Job finished at $(date)"
 ```
 
+which you submit as
+```
+sbatch --partition=zen4_0768_h100x4 submit_slurm.sh
+```
 
 
 
