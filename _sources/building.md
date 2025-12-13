@@ -4,14 +4,10 @@
 
 
 ```
-git clone --recurse-submodules https://github.com/NGSolve/ngsolve.git src
-cd src
-git submodule update --init --recursive
-cd ..
-
-mkdir build
-cd build
-cmake ../src -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREFIX=~/local_install -DUSE_CUDA=ON
+git clone --recurse-submodules https://github.com/NGSolve/ngsolve.git src/ngsolve
+mkdir -p build/ngsolve
+cd build/ngsolve
+cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREFIX=~/install -DUSE_CUDA=ON
 ```
 
 
@@ -45,19 +41,7 @@ cmake ~/src/ngsolve \
   -DUSE_UMFPACK=OFF \
   -DBUILD_STUB_FILES=OFF
 
-make -j 8
-make install
-
-export LD_LIBRARY_PATH="/cvmfs/software.eessi.io/versions/2025.06/software/linux/x86_64/amd/zen4/software/OpenBLAS/0.3.27-GCC-13.3.0/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/cvmfs/software.asc.ac.at/versions/2025.06/software/linux/x86_64/amd/zen4/software/CUDA/12.9.0/lib:$LD_LIBRARY_PATH"
-
-
-python3
-
-import sys
-sys.path.append('/home/js65943/install/lib/python3.14/site-packages')
-import netgen
-import ngsolve
+make -j 8 install
 ```
 
 
@@ -98,6 +82,18 @@ echo "Running on host $(hostname)"
 python test.py 
 echo "Job finished at $(date)"
 ```
+
+and a python file `test.py` in the submit directory:
+```
+import sys
+sys.path.append('/home/js65943/install/lib/python3.14/site-packages')
+
+import ngsolve
+print ("have ngsolve")
+
+import ngsolve.ngscuda
+```
+
 
 which you submit as
 ```
