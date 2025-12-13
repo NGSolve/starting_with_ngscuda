@@ -16,6 +16,7 @@ cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREF
 ## build on the musica cluster:
 
 * now working exactly with gcc 13 and Python 3.14
+* importing ngsolve.ngscuda still not working
 
 ```
 module purge --force
