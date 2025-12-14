@@ -19,12 +19,13 @@ cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREF
 ## Building on the musica cluster with EESSI/2023.06
 
 ```
-module purge --force
-module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
+module --force purge
+module load EESSI/2023.06 ASC/2023.06
+module load CMake GCC/12 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
 
 python3.12 -m venv ngs
 source ngs/bin/activate
-pip install --upgrade netgen-occt-devel cmake numpy pybind11 pybind11_stubgen pip
+pip install --upgrade netgen-occt-devel numpy pybind11 pybind11_stubgen pip
 
 
 git clone --recurse-submodules https://github.com/NGSolve/ngsolve.git src/ngsolve
