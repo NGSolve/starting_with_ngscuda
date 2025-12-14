@@ -439,7 +439,9 @@ cd ~/submit
 # Example commands: replace with your job&#39;s commands
 echo &quot;Job started at $(date)&quot;
 echo &quot;Running on host $(hostname)&quot;
-python test.py 
+# python test.py
+python3 -c &quot;import ngsolve; print (ngsolve.__version__)&quot;
+python3 -c &quot;import ngsolve.ngscuda&quot;
 echo &quot;Job finished at $(date)&quot;
 </pre></div>
 </div>
