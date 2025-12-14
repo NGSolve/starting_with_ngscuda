@@ -98,7 +98,7 @@ sbatch submit_slurm.sh
 
 Open problems:
 
-* calling comiler wrapper, e.g. [ConvBenchmark.py](ConvBenchmark.py)
+* calling compiler wrapper, e.g. [ConvBenchmark.py](ConvBenchmark.py)
 
 
 ## build on the musica cluster EESSI/2025.06
@@ -106,8 +106,8 @@ Open problems:
 cannot connect to the cuda driver
 
 
-* now working exactly with gcc 13 and Python 3.14
-* importing ngsolve.ngscuda still not working
+* now compiling exactly with gcc 13 and Python 3.14
+* importing ngsolve.ngscuda still not working, cannot connect to cuda driver
 
 ```
 module purge --force
