@@ -100,6 +100,10 @@ Open problems:
 
 * calling compiler wrapper, e.g. [ConvBenchmark.py](ConvBenchmark.py)
 
+* needs `LD_LIBRARY_PATH` at run-time, but must not set at compile-time (which seems to
+  cause the compiler wrapper problem). Shall we have to hardcode the pathes into the shared libs ? 
+
+
 
 ## build on the musica cluster EESSI/2025.06
 

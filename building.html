@@ -452,6 +452,8 @@ echo &quot;Job finished at $(date)&quot;
 <p>Open problems:</p>
 <ul class="simple">
 <li><p>calling compiler wrapper, e.g. <a class="reference download internal" download="" href="_downloads/f32e84e6dde09361b306d705ca6b02fb/ConvBenchmark.py"><span class="xref download myst">ConvBenchmark.py</span></a></p></li>
+<li><p>needs <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> at run-time, but must not set at compile-time (which seems to
+cause the compiler wrapper problem). Shall we have to hardcode the pathes into the shared libs ?</p></li>
 </ul>
 </section>
 </section>
