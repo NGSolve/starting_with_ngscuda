@@ -21,7 +21,7 @@ cmake ../../src/ngsolve -DUSE_SUPERBUILD=ON -DUSE_CCACHE=ON -DCMAKE_INSTALL_PREF
 ```
 module --force purge
 module load EESSI/2023.06 ASC/2023.06
-module load CMake GCC/12 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
+module load GCC/12 CMake/3.26.3-GCCcore-12.3.0 OpenBLAS/0.3.23-GCC-12.3.0 ccache CUDA
 
 python3.12 -m venv ngs
 source ngs/bin/activate
@@ -61,7 +61,8 @@ make -j 8 install
 
 # Optional: load modules (adjust to your environment)
 
-module purge --force
+module --force purge
+module load EESSI/2023.06 ASC/2023.06
 module load GCC/12 OpenBLAS/0.3.23-GCC-12.3.0  CUDA
 
 source /home/js65943/ngs/bin/activate
