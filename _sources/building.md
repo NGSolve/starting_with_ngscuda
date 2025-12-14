@@ -96,7 +96,9 @@ sbatch submit_slurm.sh
 ```
 
 
+Open problems:
 
+* calling comiler wrapper, e.g. [ConvBenchmark.py](ConvBenchmark.py)
 
 
 ## build on the musica cluster EESSI/2025.06
