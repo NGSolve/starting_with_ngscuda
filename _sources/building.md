@@ -85,7 +85,7 @@ cd ~/submit
 echo "Job started at $(date)"
 echo "Running on host $(hostname)"
 # python test.py
-python3 -c "import ngsolve; print (ngsolve.__version__)"
+python3 -c "import ngsolve; print ("NGSolve version", ngsolve.__version__)"
 python3 -c "import ngsolve.ngscuda"
 echo "Job finished at $(date)"
 ```
