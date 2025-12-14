@@ -35,6 +35,7 @@ mkdir -p build/ngsolve
 cd build/ngsolve
 
 cmake ~/src/ngsolve \
+  -DCMAKE_BUILD_TYPE=Release \
   -DUSE_SUPERBUILD=ON \
   -DUSE_CCACHE=ON \
   -DCMAKE_INSTALL_PREFIX=~/install \
