@@ -115,7 +115,7 @@ cannot connect to the cuda driver
 * importing ngsolve.ngscuda still not working, cannot connect to cuda driver
 
 ```
-module purge --force
+module --force purge
 module load EESSI/2025.06 ASC/2025.06
 module load GCC/13 OpenBLAS/0.3.27-GCC-13.3.0  CUDA
 
@@ -131,6 +131,7 @@ mkdir -p build/ngsolve
 cd build/ngsolve
 
 cmake ~/src/ngsolve \
+  -DCMAKE_BUILD_TYPE=Release \
   -DUSE_SUPERBUILD=ON \
   -DUSE_CCACHE=ON \
   -DCMAKE_INSTALL_PREFIX=~/install \
@@ -178,7 +179,9 @@ cd ~/submit
 # Example commands: replace with your job's commands
 echo "Job started at $(date)"
 echo "Running on host $(hostname)"
-python test.py 
+# python test.py
+python3 -c "import ngsolve; print ('NGSolve version', ngsolve.__version__)"
+python3 -c "import ngsolve.ngscuda"
 echo "Job finished at $(date)"
 ```
 
