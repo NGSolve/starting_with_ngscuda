@@ -1,9 +1,7 @@
 # Timings
 
-All timings have been measured on an NVIDIA GeForce RTX 5090.
 
-
-## Timings
+## Timings on NVIDIA GeForce RTX 5090.
 
 `y = alpha * x` and `y += alpha * x`
 
